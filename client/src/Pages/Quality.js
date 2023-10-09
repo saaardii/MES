@@ -59,30 +59,30 @@ function Quality() {
     { field: "job", headerName: "Ricetta", width: 200, headerAlign: "left" },
     {
       field: "cycletime",
-      headerName: "Tempo di ciclo reale",
+      headerName: "Tempo di ciclo reale (s)",
       type: "number",
       width: 200,
       headerAlign: "left",
     },
     {
       field: "cushionstroke",
-      headerName: "Quota cuscino",
+      headerName: "Quota cuscino (mm)",
       type: "number",
-      width: 130,
+      width: 180,
       headerAlign: "left",
     },
     {
       field: "dosingtime",
-      headerName: "Tempo di dosaggio",
+      headerName: "Tempo di dosaggio (s)",
       type: "number",
-      width: 170,
+      width: 200,
       headerAlign: "left",
     },
     {
       field: "injectiontime",
-      headerName: "Tempo di iniezione",
+      headerName: "Tempo di iniezione (s)",
       type: "number",
-      width: 170,
+      width: 200,
       headerAlign: "left",
     },
   ];
@@ -104,11 +104,13 @@ function Quality() {
         <br></br>
         Contatore cicli: {machineStatus.cycleCount}
         <br></br>
-        Quota cuscino: {machineStatus.cushionStroke}
+        Quota cuscino: {machineStatus.cushionStroke / 10000} mm
         <br></br>
-        Tempo dosaggio: {machineStatus.dosingTime}
-        <br></br>
-        Tempo iniezione: {machineStatus.injectionTime}
+        Tempo dosaggio: {machineStatus.dosingTime / 1000} s<br></br>
+        Tempo iniezione: {machineStatus.injectionTime / 1000} s<br></br>
+      </Typography>
+      <Typography variant="h4">
+        Storico cicli
         <br></br>
       </Typography>
       <DataGrid
@@ -117,6 +119,14 @@ function Quality() {
         initialState={{
           pagination: {
             paginationModel: { pageSize: 10 },
+          },
+          filter: {
+            filterModel: {
+              items: [{ field: "machinename", value: id }],
+            },
+          },
+          sorting: {
+            sortModel: [{ field: "cyclecounter", sort: "desc" }],
           },
         }}
         pageSizeOptions={[10, 20, 50, 100]}

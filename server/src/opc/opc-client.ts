@@ -354,8 +354,21 @@ export async function sendJob(data) {
         },
       },
     },
+    {
+      //ResetJobCounters - Reset produzione
+      nodeId: "ns=2;i=20282",
+      attributeId: AttributeIds.Value,
+      value: {
+        value: {
+          statusCode: StatusCodes.Good,
+          dataType: DataType.Int32,
+          value: 1,
+        },
+      },
+    },
   ];
   await session.write(nodesToWrite);
+  await console.log(session.read(nodesToRead));
   await session.close();
   await client.disconnect();
 }
