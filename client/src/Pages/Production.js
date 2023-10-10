@@ -1,9 +1,6 @@
-import { useNavigate } from "react-router-dom";
-import { useContext, useState, useRef } from "react";
+import { useContext, useState } from "react";
 import { SocketContext } from "../Context/socket";
 import { Box, Typography } from "@mui/material";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,175 +8,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemText from "@mui/material/ListItemText";
-import Select from "@mui/material/Select";
-import Button from "@mui/material/Button";
 
 function MouldForm() {
-  const navigate = useNavigate();
   const socket = useContext(SocketContext);
-  const [machineName, setMachineName] = useState("");
-  const [machineStatus, setMachineStatus] = useState(null);
   const [jobs, setJobs] = useState(null);
-
-  const handleChange = (event) => {
-    setMachineName(event.target.value);
-  };
-
-  socket.on("status", (status) => {
-    setMachineStatus(status);
-  });
 
   socket.on("jobs", (jobs) => {
     setJobs(jobs);
   });
 
-  const nameRef = useRef();
-  const productRef = useRef();
-  const lotNameRef = useRef();
-  const mouldCodeRef = useRef();
-  const numCavitiesRef = useRef();
-  const norminalPartsRef = useRef();
-  const expCycTimeRef = useRef();
-
-  function submitHandler(event) {
-    event.preventDefault();
-
-    const answer = window.confirm(
-      "Inviare l'ordine? Verificare la modalità della macchina. I dati di produzione verranno resettati, prima di confermare l'invio dell'ordine, salvare eventuali dati di produzione presenti in macchina nel database"
-    );
-    if (answer) {
-      // Save it!
-      console.log("Thing was saved to the database.");
-    } else {
-      // Do nothing!
-      console.log("Thing was not saved to the database.");
-    }
-
-    var nameRefInput = nameRef.current.value;
-    var productInput = productRef.current.value;
-    var lotNameInput = lotNameRef.current.value;
-    var mouldCodeInput = mouldCodeRef.current.value;
-    var numCavitiesInput = numCavitiesRef.current.value;
-    var norminalPartsInput = norminalPartsRef.current.value;
-    var expCycTimeInput = expCycTimeRef.current.value;
-
-    const machine = machineStatus.find((obj) => obj.name === nameRefInput);
-
-    const DATA = {
-      url: machine.url,
-      serNum: machine.serNum,
-      name: nameRefInput,
-      product: productInput,
-      lotName: lotNameInput,
-      mouldCode: mouldCodeInput,
-      numCavities: numCavitiesInput,
-      norminalParts: norminalPartsInput,
-      expCycTime: expCycTimeInput,
-    };
-
-    socket.emit("new job", DATA);
-    nameRef.current.value = "";
-    productRef.current.value = "";
-    lotNameRef.current.value = "";
-    mouldCodeRef.current.value = "";
-    numCavitiesRef.current.value = "";
-    norminalPartsRef.current.value = "";
-    expCycTimeRef.current.value = "";
-    navigate(`/quality/${machine.name}`);
-  }
-
   return (
     <Box sx={{ p: 10 }}>
-      <Typography variant="h4">
-        Invio ordini/commesse
-        <br></br>
-      </Typography>
-      <Box component="form" onSubmit={submitHandler}>
-        <FormControl required sx={{ m: 1, width: 300, mt: 3 }}>
-          <InputLabel id="select-mould-label">Pressa</InputLabel>
-          <Select
-            labelId="select-mould-label"
-            label="Pressa"
-            value={machineName}
-            onChange={handleChange}
-            inputRef={nameRef}
-          >
-            {machineStatus?.map((machine) => (
-              <MenuItem key={machine.name} value={machine.name}>
-                <ListItemText primary={machine.name} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
-          <TextField
-            required
-            label="Codice commessa"
-            id="lotName"
-            inputRef={lotNameRef}
-          />
-        </FormControl>
-        <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
-          <TextField
-            required
-            label="Codice articolo"
-            id="product"
-            inputRef={productRef}
-          />
-        </FormControl>
-        <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
-          <TextField
-            required
-            label="Codice stampo"
-            id="mouldCode"
-            inputRef={mouldCodeRef}
-          />
-        </FormControl>
-        <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
-          <TextField
-            required
-            label="Pezzi da produrre"
-            type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            id="norminalParts"
-            inputRef={norminalPartsRef}
-          />
-        </FormControl>
-        <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
-          <TextField
-            required
-            label="Cavità stampo"
-            type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            id="numCavities"
-            inputRef={numCavitiesRef}
-          />
-        </FormControl>
-        <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
-          <TextField
-            required
-            label="Tempo di ciclo (previsto)"
-            type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            id="expCycTime"
-            inputRef={expCycTimeRef}
-          />
-        </FormControl>
-        <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
-          <Button type="submit" variant="contained">
-            Aggiungi commessa
-          </Button>
-        </FormControl>
-      </Box>
       <Typography variant="h4">
         Storico ordini/commesse
         <br></br>
