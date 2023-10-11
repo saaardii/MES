@@ -79,13 +79,13 @@ function MachineItem(props) {
             }}
           />
           <CardMedia
+            display="flex"
             align="center"
             component="img"
             src={icon}
             alt=""
             sx={{
-              width: 80,
-              height: 80,
+              width: icon == "manual.png" || icon == "setup.png" ? 100 : 130,
             }}
           />
           <CardContent>

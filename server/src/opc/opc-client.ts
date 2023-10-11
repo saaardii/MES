@@ -45,6 +45,7 @@ export const endpoints = [
     numCavities: null,
     alarmStatus: null,
     cycleCount: null,
+    machineCycleCount: null,
     cushionStroke: null,
     dosingTime: null,
     injectionTime: null,
@@ -160,6 +161,11 @@ const nodesToRead = [
     nodeId: "ns=2;i=20045",
     attributeId: AttributeIds.Value,
   },
+  {
+    //machine cycle counter
+    nodeId: "ns=2;i=20017",
+    attributeId: AttributeIds.Value,
+  },
 ];
 
 async function establishConnection(opcuaServer): Promise<void> {
@@ -265,18 +271,21 @@ async function establishConnection(opcuaServer): Promise<void> {
     opcuaServer.cushionStroke = data[6].value.value;
     opcuaServer.dosingTime = data[7].value.value;
     opcuaServer.injectionTime = data[8].value.value;
-    setCycle(
-      dataValue.value.value,
-      opcuaServer.lotName,
-      opcuaServer.product,
-      opcuaServer.job,
-      opcuaServer.cycleTime,
-      opcuaServer.serNum,
-      opcuaServer.name,
-      opcuaServer.cushionStroke,
-      opcuaServer.dosingTime,
-      opcuaServer.injectionTime
-    );
+    opcuaServer.machineCycleCount = data[9].value.value;
+    if (opcuaServer.mode == 1 || opcuaServer.mode == 2) {
+      setCycle(
+        opcuaServer.machineCycleCount, //qua salvo a database il contatore dei cicli totali della macchina non i cicli della commessa
+        opcuaServer.lotName,
+        opcuaServer.product,
+        opcuaServer.job,
+        opcuaServer.cycleTime,
+        opcuaServer.serNum,
+        opcuaServer.name,
+        opcuaServer.cushionStroke,
+        opcuaServer.dosingTime,
+        opcuaServer.injectionTime
+      );
+    }
   });
 }
 

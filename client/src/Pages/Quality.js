@@ -75,12 +75,16 @@ function Quality() {
     switch (machineStatus.mode) {
       case 1:
         setMachineMode("Automatico");
+        break;
       case 2:
         setMachineMode("Semi-automatico");
+        break;
       case 3:
-        setMachineMode("Manutenzione");
-      case 4:
         setMachineMode("Manuale");
+        break;
+      case 4:
+        setMachineMode("Manutenzione");
+        break;
     }
   });
 
@@ -196,7 +200,7 @@ function Quality() {
         <Grid item>
           <Button
             onClick={functionopenpopup}
-            disabled={machineStatus.mode == 1 || machineStatus.mode == 2}
+            disabled={machineStatus.mode === 1 || machineStatus.mode === 2}
             type="submit"
             variant="contained"
           >

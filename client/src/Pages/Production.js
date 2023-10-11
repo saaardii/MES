@@ -1,21 +1,76 @@
 import { useContext, useState } from "react";
 import { SocketContext } from "../Context/socket";
 import { Box, Typography } from "@mui/material";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import { DataGrid } from "@mui/x-data-grid";
 
 function MouldForm() {
   const socket = useContext(SocketContext);
-  const [jobs, setJobs] = useState(null);
+  const [jobsList, setJobsList] = useState([]);
 
   socket.on("jobs", (jobs) => {
-    setJobs(jobs);
+    setJobsList(jobs);
   });
+
+  const columns = [
+    {
+      field: "id",
+      headerName: "N. Commessa",
+      width: 120,
+      type: "number",
+      headerAlign: "left",
+    },
+    {
+      field: "created_at",
+      headerName: "Data creazione",
+      width: 240,
+      headerAlign: "left",
+    },
+    {
+      field: "sernum",
+      headerName: "Matricola",
+      width: 100,
+      headerAlign: "left",
+    },
+    {
+      field: "lotname",
+      headerName: "Codice commessa",
+      width: 200,
+      headerAlign: "left",
+    },
+    {
+      field: "product",
+      headerName: "Codice articolo",
+      width: 200,
+      headerAlign: "left",
+    },
+    {
+      field: "mouldcode",
+      headerName: "Codice Stampo",
+      width: 200,
+      headerAlign: "left",
+    },
+    {
+      field: "norminalparts",
+      headerName: "Pezzi commessa",
+      type: "number",
+      width: 150,
+      headerAlign: "left",
+    },
+    {
+      field: "numcavities",
+      headerName: "Numero cavità",
+      type: "number",
+      width: 150,
+      headerAlign: "left",
+    },
+    {
+      field: "exptime",
+      headerName: "Tempo di ciclo previsto",
+      type: "number",
+      width: 200,
+      headerAlign: "left",
+    },
+  ];
 
   return (
     <Box sx={{ p: 10 }}>
@@ -23,7 +78,27 @@ function MouldForm() {
         Storico ordini/commesse
         <br></br>
       </Typography>
-      <TableContainer component={Paper}>
+      <DataGrid
+        rows={jobsList}
+        columns={columns}
+        initialState={{
+          pagination: {
+            paginationModel: { pageSize: 10 },
+          },
+          sorting: {
+            sortModel: [{ field: "timestamp", sort: "desc" }],
+          },
+        }}
+        pageSizeOptions={[10, 20, 50, 100]}
+        sx={{ width: 1600, marginTop: 2 }}
+      />
+    </Box>
+  );
+}
+
+export default MouldForm;
+
+/*<TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} size="small">
           <TableHead>
             <TableRow>
@@ -77,9 +152,4 @@ function MouldForm() {
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
-    </Box>
-  );
-}
-
-export default MouldForm;
+      </TableContainer>*/
