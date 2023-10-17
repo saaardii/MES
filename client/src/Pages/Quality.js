@@ -96,7 +96,7 @@ function Quality() {
     {
       field: "cyclecounter",
       headerName: "N. Ciclo",
-      width: 80,
+      width: 100,
       type: "number",
       headerAlign: "left",
     },
