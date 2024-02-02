@@ -20,7 +20,6 @@ function MachineItem(props) {
         } else {
           setColor("greenyellow");
           setIcon("automatic.png");
-          // cambia icona modalità auto
         }
         break;
       case 2:
@@ -30,18 +29,18 @@ function MachineItem(props) {
         } else {
           setColor("greenyellow");
           setIcon("semi-automatic.png");
-          // cambia icona modalità semi
         }
         break;
       case 3:
-        if (props.alarmStatus) {
-          setColor("red");
-          setIcon("alarm.png");
-        } else {
-          setColor("yellow");
+        const interval = setInterval(() => {
+          if (props.alarmStatus) {
+            setColor("red");
+            setIcon("alarm.png");
+          }
+
           setIcon("manual.png");
-          // cambia icona modalità manual
-        }
+          return () => clearInterval(interval);
+        }, 3000);
         break;
       case 4:
         if (props.alarmStatus) {
@@ -50,11 +49,10 @@ function MachineItem(props) {
         } else {
           setColor("yellow");
           setIcon("setup.png");
-          // cambia icona modalità setup
         }
         break;
     }
-  }, [props]);
+  }, []);
 
   return (
     <Grid item>
@@ -89,11 +87,16 @@ function MachineItem(props) {
             }}
           />
           <CardContent>
-            <Typography align="left">Matricola: {props.serNum}</Typography>
             <Typography align="left">
-              Codice commessa: {props.lotName}
+              <strong>Codice commessa: </strong>
+              <br></br>
+              {props.lotName}
             </Typography>
-            <Typography align="left">Ricetta stampo: {props.job}</Typography>
+            <Typography align="left">
+              <strong>Ricetta stampo: </strong>
+              <br></br>
+              {props.job}
+            </Typography>
           </CardContent>
         </CardActionArea>
       </Card>

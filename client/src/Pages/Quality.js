@@ -173,7 +173,7 @@ function Quality() {
         <Grid container direction="row" spacing={2}>
           <Grid item>
             <Typography variant="subtitle1">
-              Nome pressa: {machineStatus.name}
+              Matricola: {machineStatus.serNum}
               <br></br>
               Ricetta in uso: {machineStatus.job}
               <br></br>
