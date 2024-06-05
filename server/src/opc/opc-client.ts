@@ -14,6 +14,8 @@ import {
 } from "node-opcua";
 
 import { setCycle } from "../db/controller";
+import machines from "./../../Machine.json";
+import nodes from "./../../Node.json";
 
 const connectionStrategy = {
   initialDelay: 100,
@@ -28,7 +30,7 @@ const options = {
   endpointMustExist: false,
 };
 
-export const endpoints = [
+/*export const endpoints = [
   {
     id: 1,
     url: "opc.tcp://172.17.187.120:4842",
@@ -50,7 +52,7 @@ export const endpoints = [
     dosingTime: null,
     injectionTime: null,
   },
-];
+];*/
 
 const monitorStatusItems: { nodeId: string; attributeName: string }[] = [
   {
@@ -218,20 +220,71 @@ async function establishConnection(opcuaServer): Promise<void> {
     discardOldest: true,
     queueSize: 10,
   };
+  const monitoredItemGroup = null;
+  const monitoredItem = null;
 
-  const monitoredItemGroup = ClientMonitoredItemGroup.create(
-    subscription,
-    monitorStatusItems,
-    monitoringParameters,
-    TimestampsToReturn.Both
-  );
+  switch (opcuaServer.controlType) {
+    case "Tactum": {
+      const monitoredItemGroup = ClientMonitoredItemGroup.create(
+        subscription,
+        monitorStatusItems,
+        monitoringParameters,
+        TimestampsToReturn.Both
+      );
 
-  const monitoredItem = ClientMonitoredItem.create(
-    subscription,
-    monitorCycleItem,
-    monitoringParameters,
-    TimestampsToReturn.Both
-  );
+      const monitoredItem = ClientMonitoredItem.create(
+        subscription,
+        monitorCycleItem,
+        monitoringParameters,
+        TimestampsToReturn.Both
+      );
+    }
+    case "Tactv": {
+      const monitoredItemGroup = ClientMonitoredItemGroup.create(
+        subscription,
+        monitorStatusItems,
+        monitoringParameters,
+        TimestampsToReturn.Both
+      );
+
+      const monitoredItem = ClientMonitoredItem.create(
+        subscription,
+        monitorCycleItem,
+        monitoringParameters,
+        TimestampsToReturn.Both
+      );
+    }
+    case "Motus": {
+      const monitoredItemGroup = ClientMonitoredItemGroup.create(
+        subscription,
+        monitorStatusItems,
+        monitoringParameters,
+        TimestampsToReturn.Both
+      );
+
+      const monitoredItem = ClientMonitoredItem.create(
+        subscription,
+        monitorCycleItem,
+        monitoringParameters,
+        TimestampsToReturn.Both
+      );
+    }
+    case "Tactus": {
+      const monitoredItemGroup = ClientMonitoredItemGroup.create(
+        subscription,
+        monitorStatusItems,
+        monitoringParameters,
+        TimestampsToReturn.Both
+      );
+
+      const monitoredItem = ClientMonitoredItem.create(
+        subscription,
+        monitorCycleItem,
+        monitoringParameters,
+        TimestampsToReturn.Both
+      );
+    }
+  }
 
   monitoredItemGroup.on(
     "changed",
@@ -382,6 +435,6 @@ export async function sendJob(data) {
   await client.disconnect();
 }
 
-endpoints.forEach((server) => {
+machines.Machines.forEach((server) => {
   establishConnection(server).catch((err) => console.error(err));
 });

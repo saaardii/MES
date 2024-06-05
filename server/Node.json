@@ -1,0 +1,82 @@
+{
+  "Tactum": [
+    {
+      "serNum": "ns=2;i=20020",
+      "mode": "ns=2;i=20027",
+      "job": "ns=2;i=20003",
+      "product": "ns=2;i=20005",
+      "cycleTime": "ns=2;i=20010",
+      "goodParts": "ns=2;i=20012",
+      "lotName": "ns=2;i=20022",
+      "mouldCode": "ns=2;i=20037",
+      "nominalParts": "ns=2;i=20006",
+      "numCavities": "ns=2;i=20007",
+      "alarmStatus": "ns=2;i=20080",
+      "cycleCount": "ns=2;i=20009",
+      "machineCycleCount": "ns=2;i=20017",
+      "cushionStroke": "ns=2;i=20041",
+      "dosingTime": "ns=2;i=20046",
+      "injectionTime": "ns=2;i=20045"
+    }
+  ],
+  "Tactv": [
+    {
+      "serNum": "ns=2;i=20020",
+      "mode": "ns=2;i=20027",
+      "job": "ns=2;i=20003",
+      "product": "ns=2;i=20005",
+      "cycleTime": "ns=2;i=20010",
+      "goodParts": "ns=2;i=20012",
+      "lotName": "ns=2;i=20022",
+      "mouldCode": "ns=2;i=20037",
+      "nominalParts": "ns=2;i=20006",
+      "numCavities": "ns=2;i=20007",
+      "alarmStatus": "ns=2;i=20080",
+      "cycleCount": "ns=2;i=20009",
+      "machineCycleCount": "ns=2;i=20017",
+      "cushionStroke": "ns=2;i=20041",
+      "dosingTime": "ns=2;i=20046",
+      "injectionTime": "ns=2;i=20045"
+    }
+  ],
+  "Motus": [
+    {
+      "serNum": "ns=2;i=20020",
+      "mode": "ns=2;i=20027",
+      "job": "ns=2;i=20003",
+      "product": "ns=2;i=20005",
+      "cycleTime": "ns=2;i=20010",
+      "goodParts": "ns=2;i=20012",
+      "lotName": "ns=2;i=20022",
+      "mouldCode": "ns=2;i=20037",
+      "nominalParts": "ns=2;i=20006",
+      "numCavities": "ns=2;i=20007",
+      "alarmStatus": "ns=2;i=20080",
+      "cycleCount": "ns=2;i=20009",
+      "machineCycleCount": "ns=2;i=20017",
+      "cushionStroke": "ns=2;i=20041",
+      "dosingTime": "ns=2;i=20046",
+      "injectionTime": "ns=2;i=20045"
+    }
+  ],
+  "Tactus": [
+    {
+      "serNum": "ns=2;i=20020",
+      "mode": "ns=2;i=20027",
+      "job": "ns=2;i=20003",
+      "product": "ns=2;i=20005",
+      "cycleTime": "ns=2;i=20010",
+      "goodParts": "ns=2;i=20012",
+      "lotName": "ns=2;i=20022",
+      "mouldCode": "ns=2;i=20037",
+      "nominalParts": "ns=2;i=20006",
+      "numCavities": "ns=2;i=20007",
+      "alarmStatus": "ns=2;i=20080",
+      "cycleCount": "ns=2;i=20009",
+      "machineCycleCount": "ns=2;i=20017",
+      "cushionStroke": "ns=2;i=20041",
+      "dosingTime": "ns=2;i=20046",
+      "injectionTime": "ns=2;i=20045"
+    }
+  ]
+}

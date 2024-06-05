@@ -1,0 +1,26 @@
+{
+  "Machines": [
+    {
+      "id": 1,
+      "url": "opc.tcp://172.17.187.120:4842",
+      "name": "Pressa collaudo",
+      "controlType": "Tactum",
+      "serNum": null,
+      "mode": null,
+      "job": null,
+      "product": null,
+      "cycleTime": null,
+      "goodParts": null,
+      "lotName": null,
+      "mouldCode": null,
+      "norminalParts": null,
+      "numCavities": null,
+      "alarmStatus": null,
+      "cycleCount": null,
+      "machineCycleCount": null,
+      "cushionStroke": null,
+      "dosingTime": null,
+      "injectionTime": null
+    }
+  ]
+}
