@@ -3,7 +3,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 const { clearInterval } = require("timers");
-const opc = require("../dist/opc/opc-client");
+const opc = require("../dist/src/opc/opc-client");
 //CORS specifica i metodi e le funzionalità permesse sul server
 const port = process.env.PORT || 4000;
 const app = express();
